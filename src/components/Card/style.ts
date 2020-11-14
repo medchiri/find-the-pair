@@ -9,7 +9,6 @@ export const CardWrapper = styled.div<{
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    margin: 10px;
     height: 10rem;
     width: 10rem;
 

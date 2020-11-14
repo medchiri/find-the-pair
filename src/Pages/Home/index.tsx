@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import Template from 'src/components/Template';
 import Card, { CardShape } from 'src/components/Card';
-import { Cards } from './style';
+import { Column, Container, Row } from 'src/components/Grid';
 
 type CardsType = CardShape[];
 interface OpenedCard {
@@ -68,29 +68,32 @@ function Home() {
 
   return (
     <Template>
-      <p>
-        Score: {cardsSuccess.length} / {amount}
-      </p>
-      <p>Tries: {tries}</p>
-      <input
-        type="number"
-        min="10"
-        max="15"
-        value={`${amount}`}
-        onChange={e => setAmount(parseFloat(e.target.value))}
-      />
-      {cardsSuccess.length === amount && <p>you are the boss !!!</p>}
-      <Cards>
-        {cards.map((data, i) => (
-          <Card
-            key={i}
-            data={data}
-            isOpened={cardsOpen.some(e => e.index === i)}
-            isSuccess={cardsSuccess.some(e => e.id === data.id)}
-            onClick={() => handleCardClick({ index: i, data })}
-          />
-        ))}
-      </Cards>
+      <Container>
+        <p>
+          Score: {cardsSuccess.length} / {amount}
+        </p>
+        <p>Tries: {tries}</p>
+        <input
+          type="number"
+          min="6"
+          max="15"
+          value={`${amount}`}
+          onChange={e => setAmount(parseFloat(e.target.value))}
+        />
+        {cardsSuccess.length === amount && <p>you are the boss !!!</p>}
+        <Row>
+          {cards.map((data, i) => (
+            <Column key={i}>
+              <Card
+                data={data}
+                isOpened={cardsOpen.some(e => e.index === i)}
+                isSuccess={cardsSuccess.some(e => e.id === data.id)}
+                onClick={() => handleCardClick({ index: i, data })}
+              />
+            </Column>
+          ))}
+        </Row>
+      </Container>
     </Template>
   );
 }
