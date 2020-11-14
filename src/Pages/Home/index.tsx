@@ -1,15 +1,23 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import Template from '../../components/Template';
-import Card from '../../components/Card';
+import Template from 'src/components/Template';
+import Card from 'src/components/Card';
 import { Cards } from './style';
 
 function Home() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<
+    {
+      id: string;
+      img: {
+        src: string;
+        alt: string;
+      };
+    }[]
+  >([]);
 
   useEffect(() => {
     const images = Array.from(new Array(10), (_, i) => ({
-      id: i + 1,
+      id: `${i + 1}`,
       img: { src: `https://picsum.photos/300/300?random=${i + 1}`, alt: `image number ${i + 1}` },
     }));
     setImages(images);

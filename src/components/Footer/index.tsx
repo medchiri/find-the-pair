@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { FooterWrapper } from './style';
 
 function Footer() {
