@@ -21,8 +21,7 @@
     "baseUrl": ".",
     "outDir": "build/dist",
     "rootDir": "src",
-    "importHelpers": true,
-    "noUnusedLocals": true
+    "importHelpers": true
   },
   "exclude": ["node_modules", "build", "scripts", "acceptance-tests", "webpack", "jest", "src/setupTests.ts"],
   "include": ["**/*.ts", "**/*.tsx"]
