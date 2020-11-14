@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
+import { css } from 'styled-components';
 
-export const GlobalStyles = createGlobalStyle`
+export const Normalizer = css`
   *,
   *::before,
   *::after {
@@ -8,11 +8,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
 
   article,
   aside,
@@ -32,14 +32,13 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: #ffffff;
-    color: #4a4a4a;
-    font-family: 'Helvetica Now Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-      'Segoe UI Symbol', 'Noto Color Emoji';
-    font-size: 1rem;
+    background-color: var(--black);
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-size: 16px;
     font-weight: 400;
-    line-height: 1.4;
+    line-height: 1.5;
     text-align: left;
     margin: 0;
     -moz-osx-font-smoothing: grayscale;
@@ -74,36 +73,33 @@ export const GlobalStyles = createGlobalStyle`
   h4,
   h5,
   h6,
-  p,
-  ol,
-  ul,
-  dl {
+  p {
     margin-top: 0;
     margin-bottom: 1rem;
   }
 
   h1 {
-    font-size: 26px;
+    font-size: 2.5rem;
   }
 
   h2 {
-    font-size: 22px;
+    font-size: 2rem;
   }
 
   h3 {
-    font-size: 18px;
+    font-size: 1.75rem;
   }
 
   h4 {
-    font-size: 16px;
+    font-size: 1.5em;
   }
 
   h5 {
-    font-size: 14px;
+    font-size: 1.25rem;
   }
 
   h6 {
-    font-size: 12px;
+    font-size: 1rem;
   }
 
   abbr[title],
@@ -119,6 +115,13 @@ export const GlobalStyles = createGlobalStyle`
     margin-bottom: 1rem;
     font-style: normal;
     line-height: inherit;
+  }
+
+  ol,
+  ul,
+  dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 
   ol ol,
@@ -167,14 +170,14 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   a {
-    color: #239985;
+    color: var(--primary);
     text-decoration: none;
     background-color: transparent;
-    transition: color 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
   }
 
   a:hover {
-    color: #006a58;
+    color: var(--secondary);
     text-decoration: none;
   }
 
@@ -291,12 +294,6 @@ export const GlobalStyles = createGlobalStyle`
   [type='reset'],
   [type='submit'] {
     -webkit-appearance: button;
-  }
-
-  button:not(:disabled),
-  [type='button']:not(:disabled),
-  [type='reset']:not(:disabled),
-  [type='submit']:not(:disabled) {
     cursor: pointer;
   }
 
@@ -400,7 +397,28 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ::selection {
-    background-color: #239985;
-    color: #ffffff;
+    background-color: var(--primary);
+    color: white;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+
+    & > main {
+      flex: 1 0;
+      /* //* med: Navbar height */
+      padding-top: 56px;
+    }
+
+    & > footer {
+      flex: 0 0 auto;
+    }
   }
 `;

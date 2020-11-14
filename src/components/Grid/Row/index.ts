@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { Theme } from 'src/theme';
+import { Theme } from 'src/styles/theme';
 import {
   AlignContentType,
   AlignItemsType,
