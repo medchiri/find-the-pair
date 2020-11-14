@@ -1,8 +1,16 @@
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Home from './Pages/Home';
+
 function App() {
   return (
-    <div className="App">
-      <h1>hello</h1>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
