@@ -3,6 +3,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Template from 'src/components/Template';
 import Card, { CardShape } from 'src/components/Card';
 import { Column, Container, Row } from 'src/components/Grid';
+import Button from 'src/components/Button';
+import Input from 'src/components/Input';
+import { Cards } from './style';
 
 type CardsType = CardShape[];
 interface OpenedCard {
@@ -28,7 +31,7 @@ function Home() {
       .reduce((acc: CardsType, _, i: number) => {
         const card = {
           id: `${i + 1}`,
-          img: { src: `https://picsum.photos/300/300?random=${i + 1}`, alt: `image number ${i + 1}` },
+          src: `https://picsum.photos/300/300?random=${i + 1}`,
         };
         acc.push(card, card);
         return acc;
@@ -74,7 +77,7 @@ function Home() {
   return (
     <Template>
       <Container>
-        <Row>
+        <Row justifyContent="space-between">
           <Column>
             <p>
               Score: {score} / {amount}
@@ -82,31 +85,34 @@ function Home() {
             <p>Tries: {tries}</p>
           </Column>
           <Column>
-            <input
+            <Input
               type="number"
               min="6"
               max="15"
               value={`${amount}`}
               onChange={e => setAmount(parseFloat(e.target.value))}
             />
-            <button type="button" onClick={handleReset}>
-              Reset
-            </button>
+            <Button onClick={handleReset}>Reset</Button>
           </Column>
         </Row>
-        {score === amount && <p>you are the boss !!!</p>}
-        <Row>
-          {cards.map((data, i) => (
-            <Column key={i}>
-              <Card
-                data={data}
-                isOpened={cardsOpen.some(e => e.index === i)}
-                isSuccess={cardsSuccess.some(e => e.id === data.id && e.index === i)}
-                onClick={() => handleCardClick({ index: i, data })}
-              />
-            </Column>
-          ))}
-        </Row>
+        <Cards>
+          <Row gutter={{ xs: '5px', md: 0.5 }} justifyContent="center">
+            {cards.map((data, i) => {
+              const isOpened = cardsOpen.some(e => e.index === i);
+              const isSuccess = cardsSuccess.some(e => e.id === data.id && e.index === i);
+              return (
+                <Column key={i}>
+                  <Card
+                    data={data}
+                    isOpened={isOpened}
+                    isSuccess={isSuccess}
+                    onClick={() => !isOpened && !isSuccess && handleCardClick({ index: i, data })}
+                  />
+                </Column>
+              );
+            })}
+          </Row>
+        </Cards>
       </Container>
     </Template>
   );

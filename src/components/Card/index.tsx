@@ -4,10 +4,7 @@ import { CardWrapper } from './style';
 
 export interface CardShape {
   id: string;
-  img: {
-    src: string;
-    alt: string;
-  };
+  src: string;
 }
 
 interface Props {
@@ -18,11 +15,13 @@ interface Props {
 }
 
 function Card({ data, isOpened, isSuccess, onClick }: Props) {
-  const { img, id } = data;
+  const { src, id } = data;
 
   return (
-    <CardWrapper id={id} onClick={onClick} isOpened={isOpened || isSuccess}>
-      <img {...img} />
+    <CardWrapper id={id} onClick={onClick} isOpened={isOpened} isSuccess={isSuccess}>
+      <div className="image-wrapper">
+        <img src={src} alt="" />
+      </div>
     </CardWrapper>
   );
 }

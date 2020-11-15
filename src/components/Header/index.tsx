@@ -7,7 +7,7 @@ function Header() {
   return (
     <HeaderWrapper>
       <Container>
-        <h1>Find the pairs</h1>
+        <h1>Find the pair</h1>
       </Container>
     </HeaderWrapper>
   );

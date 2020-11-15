@@ -31,7 +31,7 @@ const getGutterValue: GetGutterValue = (value = 1) => {
 };
 
 interface RowProps {
-  gutter?: CustomValueType<number>;
+  gutter?: CustomValueType<number | string>;
   direction?: CustomValueType<DirectionType>;
   justifyContent?: CustomValueType<JustifyContentType>;
   alignItems?: CustomValueType<AlignItemsType>;
