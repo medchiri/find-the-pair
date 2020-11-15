@@ -4,7 +4,7 @@ import Template from 'src/components/Template';
 import Card, { CardShape } from 'src/components/Card';
 import { Column, Container, Row } from 'src/components/Grid';
 import Button from 'src/components/Button';
-import Input from 'src/components/Input';
+import Select from 'src/components/Select';
 import { Cards } from './style';
 
 type CardsType = CardShape[];
@@ -19,7 +19,7 @@ interface SuccessCard {
 type OpenedCards = OpenedCard[];
 
 function Home() {
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(5);
   const [tries, setTries] = useState(0);
   const [cards, setCards] = useState<CardsType>([]);
   const [cardsOpen, setCardsOpen] = useState<OpenedCards>([]);
@@ -85,13 +85,13 @@ function Home() {
             <p>Tries: {tries}</p>
           </Column>
           <Column>
-            <Input
-              type="number"
-              min="6"
-              max="15"
-              value={`${amount}`}
-              onChange={e => setAmount(parseFloat(e.target.value))}
-            />
+            <Select value={`${amount}`} onChange={e => setAmount(parseFloat(e.target.value))}>
+              {Array.from(new Array(11), (_, i) => i + 5).map(v => (
+                <option value={v} key={v}>
+                  {v}
+                </option>
+              ))}
+            </Select>
             <Button onClick={handleReset}>Reset</Button>
           </Column>
         </Row>
