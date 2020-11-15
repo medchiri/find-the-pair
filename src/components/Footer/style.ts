@@ -15,8 +15,8 @@ const heartbeat = keyframes`
 export const FooterWrapper = styled.footer`
   font-size: 14px;
   background-color: black;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   &,
   a {
