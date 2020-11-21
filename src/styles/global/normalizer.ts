@@ -414,7 +414,8 @@ export const Normalizer = css`
     & > main {
       flex: 1 0;
       /* //* med: Navbar height */
-      padding-top: 56px;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
     }
 
     & > footer {

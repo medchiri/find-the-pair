@@ -13,12 +13,20 @@ export const CardWrapper = styled.div<{
     opacity: ${isSuccess ? 0 : 1};
 
     @media ${theme.breakpoints.min.md} {
-      height: 10rem;
-      width: 10rem;
+      height: 8rem;
+      width: 8rem;
+    }
+
+    .image-wrapper,
+    img {
+      border-radius: 6px;
+
+      @media ${theme.breakpoints.min.md} {
+        border-radius: 10px;
+      }
     }
 
     .image-wrapper {
-      border-radius: 10px;
       border: 1px solid var(--grey);
       background-color: var(--blackLight);
       position: relative;
@@ -30,7 +38,6 @@ export const CardWrapper = styled.div<{
     }
 
     img {
-      border-radius: 10px;
       display: block;
       height: 100%;
       width: 100%;

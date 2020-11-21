@@ -1,30 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import Template from 'src/components/Template';
-import Card, { CardShape } from 'src/components/Card';
+import { CardShape } from 'src/components/Card';
 import { Column, Container, Row } from 'src/components/Grid';
-import Button from 'src/components/Button';
-import Select from 'src/components/Select';
-import { Cards } from './style';
+import Cards from './Cards';
+import Aside from './Aside';
 
-type CardsType = CardShape[];
-interface OpenedCard {
+export type CardsType = CardShape[];
+
+export interface OpenedCard {
   index: number;
   data: CardShape;
 }
-interface SuccessCard {
+
+export interface SuccessCard {
   index: number;
   id: string;
 }
-type OpenedCards = OpenedCard[];
+
+export type OpenedCards = OpenedCard[];
+
+export type SuccessCards = SuccessCard[];
 
 function Home() {
   const [amount, setAmount] = useState(5);
   const [tries, setTries] = useState(0);
   const [cards, setCards] = useState<CardsType>([]);
   const [cardsOpen, setCardsOpen] = useState<OpenedCards>([]);
-  const [cardsSuccess, setCardsSuccess] = useState<SuccessCard[]>([]);
+  const [cardsSuccess, setCardsSuccess] = useState<SuccessCards>([]);
   const timeoutId = useRef(-1);
+  const isSuccess = cardsSuccess.length === cards.length;
 
   const createNewSession = (amount: number) => {
     const cards = Array.from(new Array(amount))
@@ -72,47 +77,35 @@ function Home() {
 
   const handleReset = () => createNewSession(amount);
 
+  const handleAmountChange = (e: ChangeEvent<HTMLSelectElement>) => setAmount(parseFloat(e.target.value));
+
   const score = cardsSuccess.length / 2;
 
   return (
     <Template>
       <Container>
-        <Row justifyContent="space-between">
-          <Column>
-            <p>
-              Score: {score} / {amount}
-            </p>
-            <p>Tries: {tries}</p>
+        <Row direction={{ xs: 'row', xl: 'row-reverse' }} gutter={{ xs: 0.5, xl: 3 }} withVerticalGutter>
+          <Column value={{ xs: 12, xl: 3 }}>
+            <Aside
+              score={score}
+              amount={amount}
+              tries={tries}
+              onRest={handleReset}
+              onAmountChange={handleAmountChange}
+            />
           </Column>
-          <Column>
-            <Select value={`${amount}`} onChange={e => setAmount(parseFloat(e.target.value))}>
-              {Array.from(new Array(11), (_, i) => i + 5).map(v => (
-                <option value={v} key={v}>
-                  {v}
-                </option>
-              ))}
-            </Select>
-            <Button onClick={handleReset}>Reset</Button>
+          <Column value={{ xs: 12, xl: 'col' }}>
+            <Cards
+              cards={cards}
+              cardsOpen={cardsOpen}
+              cardsSuccess={cardsSuccess}
+              onCardClick={handleCardClick}
+              onRest={handleReset}
+              isSuccess={isSuccess}
+              tries={tries}
+            />
           </Column>
         </Row>
-        <Cards>
-          <Row gutter={{ xs: '5px', md: 0.5 }} justifyContent="center">
-            {cards.map((data, i) => {
-              const isOpened = cardsOpen.some(e => e.index === i);
-              const isSuccess = cardsSuccess.some(e => e.id === data.id && e.index === i);
-              return (
-                <Column key={i}>
-                  <Card
-                    data={data}
-                    isOpened={isOpened}
-                    isSuccess={isSuccess}
-                    onClick={() => !isOpened && !isSuccess && handleCardClick({ index: i, data })}
-                  />
-                </Column>
-              );
-            })}
-          </Row>
-        </Cards>
       </Container>
     </Template>
   );

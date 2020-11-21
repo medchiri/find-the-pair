@@ -7,6 +7,9 @@ export const HeaderWrapper = styled.header`
   text-align: center;
 
   h1 {
+    @media ${({ theme }) => theme.breakpoints.max.sm} {
+      font-size: 1rem;
+    }
     margin-bottom: 0;
   }
 `;
