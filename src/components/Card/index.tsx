@@ -19,7 +19,8 @@ function Card({ data, isOpened, isSuccess, onClick }: Props) {
 
   return (
     <CardWrapper id={id} onClick={onClick} isOpened={isOpened} isSuccess={isSuccess}>
-      <div className="image-wrapper">
+      <span className="card-question">?</span>
+      <div className="card-image">
         <img src={src} alt="" />
       </div>
     </CardWrapper>

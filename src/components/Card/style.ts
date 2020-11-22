@@ -6,8 +6,8 @@ export const CardWrapper = styled.div<{
 }>(
   ({ theme, isOpened, isSuccess }) => css`
     cursor: pointer;
-    height: 4rem;
-    width: 4rem;
+    height: 5rem;
+    width: 5rem;
     perspective: 20rem;
     transition: transform 0.15s ease-in-out, opacity 0.15s ease-in-out 1s;
     opacity: ${isSuccess ? 0 : 1};
@@ -17,21 +17,40 @@ export const CardWrapper = styled.div<{
       width: 8rem;
     }
 
-    .image-wrapper,
+    .card-question {
+      display: block;
+      font-size: 2.5rem;
+      line-height: 1;
+      font-weight: 700;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      opacity: ${isOpened || isSuccess ? 0 : 1};
+      transition: font-size 0.1s linear, opacity 0.15s ease-in-out;
+      transition-delay: 0s, ${isOpened || isSuccess ? '0s' : '0.3s'};
+
+      @media ${theme.breakpoints.min.md} {
+        font-size: 4rem;
+      }
+    }
+
+    .card-image,
     img {
       border-radius: 6px;
+      height: 100%;
+      width: 100%;
 
       @media ${theme.breakpoints.min.md} {
         border-radius: 10px;
       }
     }
 
-    .image-wrapper {
+    .card-image {
       border: 1px solid var(--grey);
       background-color: var(--blackLight);
       position: relative;
-      height: 100%;
-      width: 100%;
       transition: transform 0.3s ease-in-out;
       transform-style: preserve-3d;
       transform: ${isOpened || isSuccess ? 'rotateY(0deg)' : 'rotateY(180deg)'};
@@ -39,8 +58,6 @@ export const CardWrapper = styled.div<{
 
     img {
       display: block;
-      height: 100%;
-      width: 100%;
       object-fit: cover;
       position: absolute;
       backface-visibility: hidden;
@@ -48,9 +65,13 @@ export const CardWrapper = styled.div<{
 
     ${!isOpened &&
     !isSuccess &&
-    `
+    css`
       &:hover {
-        transform: scale(1.1);
+        span {
+          @media ${theme.breakpoints.min.md} {
+            font-size: 5.5rem;
+          }
+        }
       }
     `}
   `,
